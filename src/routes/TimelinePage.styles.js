@@ -2,11 +2,15 @@ const styles = {
     timelinePage: {
       paddingLeft: '90px',
       paddingRight: '90px',
+      backgroundColor: "#d9d3c3", // 배경색 변경
     },
     pageTitle: {
-      fontWeight: 'bold',
-      marginBottom: '40px',
-    },
+        fontWeight: 'bold',
+        marginBottom: '40px',
+        marginTop: '0', // 여백을 0으로 설정
+        paddingTop: '20px', // padding으로 대체
+        backgroundColor: '#d9d3c3', // 필요 시 여기에 배경색 추가
+      },
     reportContainer: {
       backgroundColor: '#d7c3a7',
       borderRadius: '10px',
@@ -35,6 +39,7 @@ const styles = {
       textAlign: 'left',
     },
   };
+  
   
   export default styles;
   
