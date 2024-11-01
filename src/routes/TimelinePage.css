@@ -1,0 +1,41 @@
+.timeline-page {
+    padding-left: 90px;
+    padding-right: 90px;
+}
+
+.page-title {
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.report-container {
+    background-color: #d7c3a7;
+    border-radius: 10px;
+    padding: 20px 30px;
+    margin-top: 20px;
+}
+
+.report-header {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.report-title {
+    margin-right: 10px;
+}
+
+.report-count {
+    background-color: red;
+    color: white;
+    border-radius: 15px;
+    padding: 2px 8px;
+    font-size: 14px;
+}
+
+.last-update {
+    font-size: 14px;
+    color: #555;
+    text-align: left; 
+}
