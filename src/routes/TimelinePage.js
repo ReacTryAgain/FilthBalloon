@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from "../components/header/Header";
 import TimelineCard from "../components/timelineCard/TimelineCard.js";
-import './TimelinePage.css';
+import styles from './TimelinePage.styles.js';
 
 const TimelinePage = () => {
   const data = [
@@ -60,14 +60,14 @@ const TimelinePage = () => {
   return (
     <>
       <Header />
-      <div className="timeline-page">
-        <h1 className="page-title">Trash Hunt : TIMELINE</h1>
-        <div className="report-container">
-          <div className="report-header">
-            <span className="report-title">제보된 오물풍선 목록</span>
-            <span className="report-count">{reportCount}개</span>
+      <div style={styles.timelinePage}>
+        <h1 style={styles.pageTitle}>Trash Hunt : 목록 보기</h1>
+        <div style={styles.reportContainer}>
+          <div style={styles.reportHeader}>
+            <span style={styles.reportTitle}>제보된 오물풍선 목록</span>
+            <span style={styles.reportCount}>{reportCount}개</span>
           </div>
-          <p className="last-update">마지막 업데이트 : {lastUpdate}</p>
+          <p style={styles.lastUpdate}>마지막 업데이트 : {lastUpdate}</p>
           {data.map((item, index) => (
             <TimelineCard key={index} {...item} />
           ))}
