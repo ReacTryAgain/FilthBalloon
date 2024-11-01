@@ -15,7 +15,7 @@ function SidebarComponent() {
         <button style={styles.sidebarButton}>타임라인</button>
       </Link>
       <Link to="/about" style={{ textDecoration: "none" }}>
-        <button style={styles.sidebarButton}>about us</button>
+        <button style={styles.sidebarButton}>About us</button>
       </Link>
       <Link to="/game" style={{ textDecoration: "none" }}>
         <button style={styles.sidebarButton}>오물피하기 게임</button>

@@ -34,9 +34,15 @@ const styles = {
     borderRadius: "10px",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "flex-start", // 전체를 왼쪽 정렬
     gap: "15px",
-    width: "250px",
+    width: "300px",
+  },
+  formContainer: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%", // formContainer가 loginBox의 너비에 맞게 설정
+    gap: "10px",
   },
   buttonContainer: {
     display: "flex",
@@ -57,6 +63,29 @@ const styles = {
     textAlign: "center",
   },
 
+  // 입력 필드 스타일
+  inputWrapper: {
+    display: "flex",
+    alignItems: "center",
+    width: "100%", // wrapper의 너비를 100%로 설정하여 전체 정렬에 맞춤
+    gap: "10px",
+  },
+  inputLabel: {
+    fontSize: "0.9rem",
+    color: "#333",
+    fontWeight: "bold",
+    width: "10%", // 레이블을 고정 너비로 설정하여 정렬이 일관되도록
+    textAlign: "left", // 레이블 텍스트를 왼쪽 정렬
+  },
+  inputField: {
+    width: "90%", // input 필드가 고정된 너비로 설정
+    padding: "8px",
+    borderRadius: "5px",
+    border: "1px solid #cccccc",
+    outline: "none",
+    backgroundColor: "#ffffff",
+  },
+
   // 공통 버튼 스타일
   chatButton: {
     backgroundColor: "#8b5e3c",
@@ -68,27 +97,6 @@ const styles = {
     fontWeight: "bold",
     transition: "background-color 0.3s",
     textAlign: "center",
-  },
-
-  // 입력 필드 스타일
-  inputContainer: {
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    gap: "5px",
-  },
-  inputLabel: {
-    fontSize: "0.9rem",
-    color: "#333",
-    fontWeight: "bold",
-  },
-  inputField: {
-    width: "100%",
-    padding: "8px",
-    borderRadius: "5px",
-    border: "1px solid #cccccc",
-    outline: "none",
-    backgroundColor: "#ffffff",
   },
 
   // ChatComponent 스타일
