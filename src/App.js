@@ -5,6 +5,7 @@ import ReportPage from "./routes/ReportPage"; // 새로 추가할 페이지 컴�
 import InfoPage from "./routes/InfoPage";
 import TimelinePage from "./routes/TimelinePage";
 import AboutPage from "./routes/AboutPage";
+import GamePage from "./routes/GamePage";
 import "./App.css";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/info" element={<InfoPage />} />
         <Route path="/timeline" element={<TimelinePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/game" element={<GamePage />} />
       </Routes>
     </div>
   );

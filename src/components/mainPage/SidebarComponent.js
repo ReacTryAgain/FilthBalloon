@@ -17,6 +17,9 @@ function SidebarComponent() {
       <Link to="/about" style={{ textDecoration: "none" }}>
         <button style={styles.sidebarButton}>about us</button>
       </Link>
+      <Link to="/game" style={{ textDecoration: "none" }}>
+        <button style={styles.sidebarButton}>오물피하기 게임</button>
+      </Link>
     </div>
   );
 }
