@@ -21,10 +21,8 @@ const styles = {
   sidebar: {
     display: "flex",
     flexDirection: "column",
-    gap: "20px",
-  },
-  footer: {
-    marginTop: "20px",
+    gap: "40px",
+    width: "300px",
   },
 
   // LoginComponent 스타일
@@ -36,7 +34,6 @@ const styles = {
     flexDirection: "column",
     alignItems: "flex-start", // 전체를 왼쪽 정렬
     gap: "15px",
-    width: "300px",
   },
   formContainer: {
     display: "flex",
@@ -102,7 +99,7 @@ const styles = {
   // ChatComponent 스타일
   chatBox: {
     backgroundColor: "#d1bda9",
-    padding: "10px",
+    padding: "7px",
     borderRadius: "10px",
     minHeight: "500px",
     display: "flex",
@@ -113,6 +110,7 @@ const styles = {
     flexGrow: 1,
     overflowY: "auto",
     backgroundColor: "#ffffff",
+    margin: "6px",
     padding: "10px",
     borderRadius: "5px",
     marginBottom: "10px",
@@ -147,6 +145,7 @@ const styles = {
   inputContainer: {
     display: "flex",
     gap: "10px",
+    margin: "0 6px 0 6px",
   },
   inputField: {
     flex: 1,
@@ -160,6 +159,13 @@ const styles = {
   mapSection: {
     flexGrow: 1,
     margin: "0 20px",
+    height: "600px",
+  },
+  mapBox: {
+    backgroundColor: "#d1bda9",
+    padding: "10px",
+    borderRadius: "10px",
+    textAlign: "center", // 텍스트 가운데 정렬
   },
   mapPlaceholder: {
     width: "100%",
@@ -168,10 +174,16 @@ const styles = {
     marginBottom: "10px",
     borderRadius: "10px",
   },
-  mapBox: {
-    backgroundColor: "#d1bda9",
-    padding: "10px",
+  mapDescription: {
+    backgroundColor: "#ffffff", // 흰색 배경
+    padding: "20px",
+    width: "100%", // 부모 너비에 맞춤
+    height: "130px", // 설명 칸 높이
+    boxSizing: "border-box",
     borderRadius: "10px",
+    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // 가벼운 그림자 효과
+    marginTop: "10px",
+    overflowY: "auto", // 내용이 넘치면 스크롤
   },
 
   // SidebarComponent 스타일
