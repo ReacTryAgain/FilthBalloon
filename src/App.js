@@ -6,6 +6,8 @@ import InfoPage from "./routes/InfoPage";
 import TimelinePage from "./routes/TimelinePage";
 import AboutPage from "./routes/AboutPage";
 import GamePage from "./routes/GamePage";
+import SignUpPage from "./routes/SignUp";
+
 import "./App.css";
 
 function App() {
@@ -18,6 +20,7 @@ function App() {
         <Route path="/timeline" element={<TimelinePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/game" element={<GamePage />} />
+        <Route path="/signup" element={<SignUpPage />} />
       </Routes>
     </div>
   );
