@@ -15,7 +15,7 @@ const styles = {
   },
   content: {
     display: "flex",
-    width: "90%",
+    width: "95%",
     justifyContent: "space-between",
   },
   sidebar: {
@@ -34,6 +34,7 @@ const styles = {
     flexDirection: "column",
     alignItems: "flex-start", // 전체를 왼쪽 정렬
     gap: "15px",
+    width: "250px",
   },
   formContainer: {
     display: "flex",
