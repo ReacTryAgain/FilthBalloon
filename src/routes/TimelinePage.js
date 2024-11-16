@@ -33,7 +33,7 @@ const TimelinePage = () => {
       <>
         <Header />
         <div style={styles.timelinePage}>
-          <h1 style={styles.pageTitle}>Trash Hunt : 목록 보기</h1>
+          <h1 style={styles.pageTitle}>Trash Hunt : TIMELINE</h1>
           <p style={styles.noReports}>아직 제보된 데이터가 없습니다.</p>
         </div>
       </>
