@@ -53,7 +53,7 @@ const TimelinePage = () => {
     <>
       <Header />
       <div style={styles.timelinePage}>
-        <h1 style={styles.pageTitle}>Trash Hunt : 목록 보기</h1>
+        <h1 style={styles.pageTitle}>Trash Hunt : TIMELINE</h1>
         <div style={styles.reportContainer}>
           <div style={styles.reportHeader}>
             <span style={styles.reportTitle}>제보된 오물풍선 목록</span>
