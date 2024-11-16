@@ -38,6 +38,12 @@ const styles = {
       color: '#555',
       textAlign: 'left',
     },
+    noReports: {
+      textAlign: "center",
+      fontSize: "16px",
+      color: "#555",
+      marginTop: "20px",
+    },
   };
   
   

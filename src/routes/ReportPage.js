@@ -7,6 +7,8 @@ function ReportPage() {
   const [district, setDistrict] = useState("");
   const [subDistrict, setSubDistrict] = useState("");
   const [description, setDescription] = useState("");
+  const [discoveredDate, setDiscoveredDate] = useState(""); // 날짜
+  const [discoveredTime, setDiscoveredTime] = useState(""); // 시간
   const [images, setImages] = useState([]); // 여러 이미지를 저장할 배열
 
   useEffect(() => {
@@ -31,15 +33,38 @@ function ReportPage() {
   };
 
   const handleSubmit = () => {
-    // 데이터 제출 처리
-    console.log({
+    const discoveredDateTime = new Date(`${discoveredDate}T${discoveredTime}`).toISOString();
+    // 작성한 내용과 작성 시각을 로컬 스토리지에 저장
+    const currentTime = new Date().toISOString(); // 현재 시각 기록
+    const reportData = {
       city,
       district,
       subDistrict,
       description,
+      discoveredDate,
+      discoveredTime,
       images,
-    });
-    alert("제보가 등록되었습니다!");
+      createdAt: currentTime, // 작성 시각 추가
+    };
+
+    // 기존 데이터 가져오기
+    const existingReports = JSON.parse(localStorage.getItem("reports")) || [];
+    const updatedReports = [...existingReports, reportData];
+    
+    // 로컬 스토리지에 저장
+    localStorage.setItem("reports", JSON.stringify(updatedReports));
+
+    alert("제보가 성공적으로 저장되었습니다!");
+    console.log("Saved Report Data:", reportData);
+
+    // 입력값 초기화
+    setCity("");
+    setDistrict("");
+    setSubDistrict("");
+    setDescription("");
+    setDiscoveredDate("");
+    setDiscoveredTime("");
+    setImages([]);
   };
 
   return (
@@ -80,9 +105,27 @@ function ReportPage() {
             <label style={styles.inlineLabel}>상세설명:</label>
             <textarea
               style={styles.textarea}
-              placeholder="// 내용물, 떨어진 시각 등을 적어주세요"
+              placeholder="// 세부위치, 내용물 등을 적어주세요"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+          <hr style={styles.divider} />
+
+          {/* 발견 시각 */}
+          <div style={styles.inlineGroup}>
+            <label style={styles.inlineLabel}>발견 시각:</label>
+            <input
+              style={styles.input}
+              type="date" // 날짜 입력
+              value={discoveredDate}
+              onChange={(e) => setDiscoveredDate(e.target.value)}
+            />
+            <input
+              style={styles.input}
+              type="time" // 시간 입력
+              value={discoveredTime}
+              onChange={(e) => setDiscoveredTime(e.target.value)}
             />
           </div>
           <hr style={styles.divider} />
