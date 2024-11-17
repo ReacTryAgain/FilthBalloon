@@ -1,22 +1,65 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+'use client'
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate, useViewTransitionState } from "react-router-dom";
 import { loginUser } from "../../utils/auth";
-import styles from "./MainPage.styles"; // 통합된 스타일 파일 불러오기
+import { UserContext } from "../../utils/UserContext";
+import styles from "./MainPage.styles";
 
-function LoginComponent() {
+export default function LoginComponent() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+  const { login, logout } = useContext(UserContext);
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('nickname');
+    console.log('Stored nickname:', storedUsername);
+    if (storedUsername) {
+      setIsLoggedIn(true);
+      setUsername(storedUsername);
+    }
+  }, []);
 
   const handleLogin = () => {
     const result = loginUser(email, password);
     if (result.success) {
-      alert("로그인에 성공했습니다.");
-      navigate("/"); 
+        localStorage.setItem('nickname', result.nickname); // nickname을 localStorage에 저장
+        setIsLoggedIn(true);
+        setUsername(result.nickname);
+        alert("로그인에 성공했습니다.");
+        login(result.nickname, result.email);
     } else {
-      alert(result.message);
+        alert(result.message);
     }
+};
+
+  const handleSignOut = () => {
+    localStorage.removeItem('nickname'); 
+    setIsLoggedIn(false);
+    logout();
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    alert("로그아웃에 성공했습니다.");
   };
+
+  if (isLoggedIn) {
+    return (
+      <div style={styles.loginBox}>
+        <div style={styles.formContainer}>
+          <div style={styles.inputWrapper}>
+            {username ? `${username}님, 안녕하세요.` : '로그인이 필요합니다.'}
+          </div>
+        </div>
+        <div style={styles.buttonContainer}>
+          <button style={styles.loginButton} onClick={handleSignOut}>
+            SIGN OUT
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={styles.loginBox}>
@@ -56,5 +99,3 @@ function LoginComponent() {
     </div>
   );
 }
-
-export default LoginComponent;

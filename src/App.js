@@ -7,11 +7,13 @@ import TimelinePage from "./routes/TimelinePage";
 import AboutPage from "./routes/AboutPage";
 import GamePage from "./routes/GamePage";
 import SignUpPage from "./routes/SignUp";
+import { UserProvider } from "./utils/UserContext";
 
 import "./App.css";
 
 function App() {
   return (
+    <UserProvider>
     <div className="App">
       <Routes>
         <Route path="/" element={<MainPage />} />
@@ -23,6 +25,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
       </Routes>
     </div>
+    </UserProvider>
   );
 }
 

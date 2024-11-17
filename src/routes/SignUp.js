@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUpUser } from '../utils/auth';
-
 
 function SignUpPage() {
   const [email, setEmail] = useState("");
@@ -28,7 +27,7 @@ function SignUpPage() {
         alert("회원가입에 성공했습니다.");
         navigator("/");
     } else {
-    alert(result.message);
+      alert(result.message);
     }
   }
 
