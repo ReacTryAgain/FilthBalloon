@@ -2,7 +2,7 @@ const styles = {
     timelinePage: {
       paddingLeft: '90px',
       paddingRight: '90px',
-      backgroundColor: "#d9d3c3", // 배경색 변경
+      backgroundColor: "#d9d3c3", // 배경색
     },
     pageTitle: {
         fontWeight: 'bold',
@@ -37,6 +37,12 @@ const styles = {
       fontSize: '14px',
       color: '#555',
       textAlign: 'left',
+    },
+    noReports: {
+      textAlign: "center",
+      fontSize: "16px",
+      color: "#555",
+      marginTop: "20px",
     },
   };
   
