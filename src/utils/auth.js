@@ -13,9 +13,15 @@ export function loginUser(email, password) {
     const user = users[email];
     if (user && user.password === password) {
         localStorage.setItem('loggedInUser', email);
-        return { success: true };
+        return { 
+            success: true,
+            nickname: user.nickname
+        };
     }
-    return { success: false, message: "이메일 또는 비밀번호가 올바르지 않습니다." };
+    return { 
+        success: false, 
+        message: "이메일 또는 비밀번호가 올바르지 않습니다." 
+    };
 }
 
 export function isAuthenticated() {
