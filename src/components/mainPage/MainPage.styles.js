@@ -163,10 +163,12 @@ const styles = {
     height: "600px",
   },
   mapBox: {
-    backgroundColor: "#d1bda9",
+    backgroundColor: "#d1bda9", // 배경색 확인
     padding: "10px",
     borderRadius: "10px",
     textAlign: "center", // 텍스트 가운데 정렬
+    minHeight: "130px", // 최소 높이 설정
+    boxSizing: "border-box",
   },
   mapPlaceholder: {
     width: "100%",
@@ -176,15 +178,15 @@ const styles = {
     borderRadius: "10px",
   },
   mapDescription: {
-    backgroundColor: "#ffffff", // 흰색 배경
+    backgroundColor: "#ffffff",
     padding: "20px",
-    width: "100%", // 부모 너비에 맞춤
-    height: "130px", // 설명 칸 높이
+    width: "100%",
+    minHeight: "130px", // 최소 높이 설정
     boxSizing: "border-box",
     borderRadius: "10px",
-    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // 가벼운 그림자 효과
+    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // 그림자 효과
     marginTop: "10px",
-    overflowY: "auto", // 내용이 넘치면 스크롤
+    overflowY: "auto", // 내용이 넘칠 경우 스크롤
   },
 
   // SidebarComponent 스타일
