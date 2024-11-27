@@ -33,6 +33,11 @@ function ReportPage() {
   };
 
   const handleSubmit = () => {
+    // 유효성 검사: 날짜와 시간이 입력되었는지 확인
+    if (!discoveredDate || !discoveredTime) {
+      alert("발견 날짜와 시간을 모두 입력해주세요."); // 사용자에게 경고
+      return; // 함수 종료
+    }
     const discoveredDateTime = new Date(`${discoveredDate}T${discoveredTime}`).toISOString();
     // 작성한 내용과 작성 시각을 로컬 스토리지에 저장
     const currentTime = new Date().toISOString(); // 현재 시각 기록
