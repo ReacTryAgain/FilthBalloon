@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useViewTransitionState } from "react-router-dom";
 import { loginUser } from "../../utils/auth";
-import { UserContext } from "../../utils/UserContext";
+import { UserContext } from "../../utils/UserContext";``
 import styles from "./MainPage.styles";
 
 export default function LoginComponent() {
