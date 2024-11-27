@@ -3,22 +3,31 @@ import { UserContext } from "../../utils/UserContext";
 import styles from "./MainPage.styles";
 
 function ChatComponent() {
-  const { user} = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [chatMessages, setChatMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const username = user?.nickname || "익명"; // 닉네임 없을 때 "익명"으로 표시
 
-
   // 로컬스토리지에서 채팅 기록 로드
   useEffect(() => {
-    const storedMessages = JSON.parse(localStorage.getItem("chatMessages")) || [];
-    setChatMessages(storedMessages);
+    try {
+      const storedMessages = JSON.parse(localStorage.getItem("chatMessages")) || [];
+      setChatMessages(storedMessages);
+    } catch (error) {
+      console.error("Failed to load messages from localStorage:", error);
+    }
   }, []);
 
-  // 로컬스토리지에 채팅 기록 저장
   useEffect(() => {
-    localStorage.setItem("chatMessages", JSON.stringify(chatMessages));
+    if (chatMessages.length > 0) {
+      try {
+        localStorage.setItem("chatMessages", JSON.stringify(chatMessages));
+      } catch (error) {
+        console.error("Error saving chat messages to localStorage:", error);
+      }
+    }
   }, [chatMessages]);
+  
 
   const handleSendMessage = () => {
     if (newMessage.trim()) {
@@ -28,7 +37,7 @@ function ChatComponent() {
         username,
         time: new Date().toLocaleTimeString(),
       };
-      setChatMessages([...chatMessages, newChat]);
+      setChatMessages((prevMessages) => [...prevMessages, newChat]);
       setNewMessage("");
     }
   };
@@ -54,7 +63,7 @@ function ChatComponent() {
             }}
           >
             <div style={styles.chatMetadata}>
-              <span style={styles.username}>{message.username}<br></br></span>
+              <span style={styles.username}>{message.username}<br /></span>
               <span style={styles.time}>{message.time}</span>
             </div>
             <div style={styles.messageText}>{message.text}</div>
