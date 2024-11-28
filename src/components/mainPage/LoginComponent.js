@@ -1,8 +1,8 @@
-'use client'
+"use client";
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useViewTransitionState } from "react-router-dom";
 import { loginUser } from "../../utils/auth";
-import { UserContext } from "../../utils/UserContext";``
+import { UserContext } from "../../utils/UserContext";
 import styles from "./MainPage.styles";
 
 export default function LoginComponent() {
@@ -13,8 +13,8 @@ export default function LoginComponent() {
   const [username, setUsername] = useState("");
   const { login, logout } = useContext(UserContext);
   useEffect(() => {
-    const storedUsername = localStorage.getItem('nickname');
-    console.log('Stored nickname:', storedUsername);
+    const storedUsername = localStorage.getItem("nickname");
+    console.log("Stored nickname:", storedUsername);
     if (storedUsername) {
       setIsLoggedIn(true);
       setUsername(storedUsername);
@@ -24,18 +24,18 @@ export default function LoginComponent() {
   const handleLogin = () => {
     const result = loginUser(email, password);
     if (result.success) {
-        localStorage.setItem('nickname', result.nickname); // nickname을 localStorage에 저장
-        setIsLoggedIn(true);
-        setUsername(result.nickname);
-        alert("로그인에 성공했습니다.");
-        login(result.nickname, result.email);
+      localStorage.setItem("nickname", result.nickname); // nickname을 localStorage에 저장
+      setIsLoggedIn(true);
+      setUsername(result.nickname);
+      alert("로그인에 성공했습니다.");
+      login(result.nickname, result.email);
     } else {
-        alert(result.message);
+      alert(result.message);
     }
-};
+  };
 
   const handleSignOut = () => {
-    localStorage.removeItem('nickname'); 
+    localStorage.removeItem("nickname");
     setIsLoggedIn(false);
     logout();
     setUsername("");
@@ -49,7 +49,7 @@ export default function LoginComponent() {
       <div style={styles.loginBox}>
         <div style={styles.formContainer}>
           <div style={styles.inputWrapper}>
-            {username ? `${username}님, 안녕하세요.` : '로그인이 필요합니다.'}
+            {username ? `${username}님, 안녕하세요.` : "로그인이 필요합니다."}
           </div>
         </div>
         <div style={styles.buttonContainer}>
@@ -70,8 +70,8 @@ export default function LoginComponent() {
             type="text"
             style={styles.inputField}
             placeholder="아이디를 입력하세요"
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div style={styles.inputWrapper}>
@@ -81,7 +81,7 @@ export default function LoginComponent() {
             style={styles.inputField}
             placeholder="비밀번호를 입력하세요"
             value={password}
-            onChange={(e) => setPassword(e.target.value)} 
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
       </div>
@@ -89,10 +89,7 @@ export default function LoginComponent() {
         <button style={styles.loginButton} onClick={handleLogin}>
           SIGN IN
         </button>
-        <button
-          style={styles.loginButton}
-          onClick={() => navigate("/signup")}
-        >
+        <button style={styles.loginButton} onClick={() => navigate("/signup")}>
           SIGN UP
         </button>
       </div>
