@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./MainPage.styles";
+import Modal from "./Modal";
 
 function MapComponent() {
   const [selectedReport, setSelectedReport] = useState(null);
@@ -19,8 +20,11 @@ function MapComponent() {
 
         const container = document.getElementById("map");
         const options = {
-          center: new window.kakao.maps.LatLng(37.582925, 127.010538),
-          level: 8,
+          center: new window.kakao.maps.LatLng(
+            37.574587659983,
+            129.89005991945
+          ),
+          level: 7,
         };
         const kakaoMap = new window.kakao.maps.Map(container, options);
 
@@ -41,6 +45,11 @@ function MapComponent() {
       console.error("Kakao Maps API 로드 실패");
     };
   }, []);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   const addMarkers = (reportsData, kakaoMap) => {
     const geocoder = new window.kakao.maps.services.Geocoder();
@@ -77,6 +86,7 @@ function MapComponent() {
               images,
               address: `${city}시 ${district}구 ${subDistrict}동`,
             });
+            openModal();
           });
 
           if (index === 0) {
@@ -91,18 +101,18 @@ function MapComponent() {
 
   return (
     <div style={styles.mapSection}>
-      <div id="map" style={styles.mapPlaceholder}></div>
-      <div style={styles.mapBox}>
-        {selectedReport ? (
-          <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-            {selectedReport.images && selectedReport.images.length > 0 && (
-              <img
-                src={selectedReport.images[0]}
-                alt="발견된 이미지"
-                style={styles.previewImage}
-              />
-            )}
-            <div style={styles.mapDescriptionText}>
+      <div style={{ position: "relative", height: "100vh" }}>
+        <div id="map" style={{ width: "100%", height: "800px" }}></div>
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          {selectedReport && (
+            <div>
+              {selectedReport.images && selectedReport.images.length > 0 && (
+                <img
+                  src={selectedReport.images[0]}
+                  alt="발견된 이미지"
+                  style={{ maxWidth: "100%", borderRadius: "8px" }}
+                />
+              )}
               <p>
                 <strong>발견 장소:</strong> {selectedReport.address}
               </p>
@@ -116,12 +126,8 @@ function MapComponent() {
                 <strong>발견 시각:</strong> {selectedReport.discoveredTime}
               </p>
             </div>
-          </div>
-        ) : (
-          <p style={{ color: "#555", textAlign: "center" }}>
-            마커를 클릭하면 이곳에 설명이 표시됩니다.
-          </p>
-        )}
+          )}
+        </Modal>
       </div>
     </div>
   );
