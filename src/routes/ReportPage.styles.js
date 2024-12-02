@@ -177,6 +177,13 @@ const styles = {
     borderBottom: "1px solid #ccc",
     cursor: "pointer",
   },
+  scrollContainer: {
+    maxHeight: '500px', 
+    overflowY: 'auto',  
+    border: '1px solid #ccc',
+    borderRadius: '8px', 
+    padding: '8px', 
+  },
 };
 
 export default styles;
