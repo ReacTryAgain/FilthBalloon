@@ -17,7 +17,7 @@ const styles = {
     padding: "20px 30px",
     marginTop: "30px",
     width: "80%", // 너비를 80%로 설정 (필요에 따라 조정 가능)
-    maxWidth: "900px", // 최대 너비 설정
+    maxWidth: "1000px", // 최대 너비 설정
     margin: "0 auto", // 중앙 정렬
   },
   reportHeader: {

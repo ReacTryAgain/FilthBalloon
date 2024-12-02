@@ -11,7 +11,8 @@ const TimelinePage = () => {
   useEffect(() => {
     // 로컬 스토리지에서 데이터 불러오기
     const storedReports = JSON.parse(localStorage.getItem("reports")) || [];
-    const formattedReports = storedReports.map((report) => ({
+    const formattedReports = storedReports.map((report, index) => ({
+      id: index, // 각 항목에 고유id 추가
       title: `${report.addressInput} ${report.addressDetail}`,
       description: report.description,
       dateSubmitted: new Date(report.createdAt).toLocaleString(),
@@ -28,6 +29,18 @@ const TimelinePage = () => {
       document.body.style.backgroundColor = ""; // 컴포넌트 언마운트 시 초기화
     };
   }, []);
+
+  // 선택된 제보만 삭제
+  const handleDelete = (id) => {
+    // 로컬 스토리지에서 해당 데이터 삭제
+    const storedReports = JSON.parse(localStorage.getItem("reports")) || [];
+    const updatedReports = storedReports.filter((_, index) => index !== id);
+    localStorage.setItem("reports", JSON.stringify(updatedReports));
+
+    // 상태 업데이트
+    setData((prevData) => prevData.filter((_, index) => index !== id));
+    alert("제보 내용이 삭제되었습니다.");
+  };
 
   const handleClearAll = () => {
     // reports 키만 삭제
@@ -78,6 +91,7 @@ const TimelinePage = () => {
               dateSubmitted={item.dateSubmitted}
               dateFound={item.dateFound}
               images={item.images}
+              onDelete={() => handleDelete(item.id)} // 삭제 핸들러 전달
             />
           ))}
         </div>
