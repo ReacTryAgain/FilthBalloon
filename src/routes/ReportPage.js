@@ -35,17 +35,65 @@ function ReportPage() {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
+  // const searchAddress = () => {
+  //   if (!addressInput.trim()) return;
+
+  //   // const geocoder = new window.kakao.maps.services.Geocoder();
+  //   // geocoder.addressSearch(addressInput, (result, status) => {
+  //   //   if (status === window.kakao.maps.services.Status.OK) {
+  //   //     setAddressResults(result); // 검색 결과 저장
+  //   //     setIsModalOpen(true); // 모달 열기
+  //   //   } else {
+  //   //     alert("주소 검색에 실패했습니다. 다시 시도해주세요.");
+  //   //   }
+  //   // });
+
+  //   const ps = new window.kakao.maps.services.Places(); // 장소 검색 객체 생성
+  //   ps.keywordSearch(addressInput, (data, status) => {
+  //     if (status === window.kakao.maps.services.Status.OK) {
+  //       setAddressResults(data); // 검색 결과 저장
+  //       setIsModalOpen(true); // 모달 열기
+  //     } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
+  //       alert("검색 결과가 없습니다. 다른 키워드를 입력해보세요.");
+  //     } else {
+  //       alert("검색 중 오류가 발생했습니다. 다시 시도해주세요.");
+  //     }
+  //   });
+  // };
+
   const searchAddress = () => {
     if (!addressInput.trim()) return;
 
     const geocoder = new window.kakao.maps.services.Geocoder();
+    const places = new window.kakao.maps.services.Places();
+    let combinedResults = []; // 두 검색 결과를 저장할 배열
+
+    // 1. 주소 검색 (addressSearch)
     geocoder.addressSearch(addressInput, (result, status) => {
       if (status === window.kakao.maps.services.Status.OK) {
-        setAddressResults(result); // 검색 결과 저장
-        setIsModalOpen(true); // 모달 열기
-      } else {
-        alert("주소 검색에 실패했습니다. 다시 시도해주세요.");
+        combinedResults = [...result]; // 주소 검색 결과 저장
       }
+
+      // 2. 키워드 검색 (keywordSearch)
+      places.keywordSearch(addressInput, (data, status) => {
+        if (status === window.kakao.maps.services.Status.OK) {
+          combinedResults = [...combinedResults, ...data]; // 키워드 검색 결과 추가
+        }
+
+        // 중복 제거 및 결과 저장
+        const uniqueResults = combinedResults.reduce((acc, current) => {
+          const isDuplicate = acc.some(
+            (item) =>
+              item.address_name === current.address_name &&
+              item.place_name === current.place_name
+          );
+          if (!isDuplicate) acc.push(current);
+          return acc;
+        }, []);
+
+        setAddressResults(uniqueResults); // 최종 결과 저장
+        setIsModalOpen(true); // 모달 열기
+      });
     });
   };
 
@@ -93,12 +141,6 @@ function ReportPage() {
 
     // 메인 페이지로 이동
     navigate("/"); // "/main" 경로로 이동 (적절한 경로로 수정 필요)
-
-    // setAddressDetail(""); // 상세주소 초기화
-    // setDescription("");
-    // setDiscoveredDate("");
-    // setDiscoveredTime("");
-    // setImages([]);
   };
 
   const validateAddress = async (address) => {
