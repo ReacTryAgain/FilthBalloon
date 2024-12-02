@@ -18,7 +18,7 @@
 
 <br/>
 
-## 📝 Composition
+## 📝 페이지 구성
 <details>
 <summary>메인 페이지</summary>
 <div markdown="1">
