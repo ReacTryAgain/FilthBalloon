@@ -58,6 +58,13 @@ const styles = {
     transition: "background-color 0.3s",
     textAlign: "center",
   },
+  scrollContainer: {
+    maxHeight: '600px', 
+    overflowY: 'auto',  
+    border: '1px solid #ccc',
+    borderRadius: '8px', 
+    padding: '8px', 
+  },
 };
 
 export default styles;
