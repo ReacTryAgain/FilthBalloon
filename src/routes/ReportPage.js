@@ -28,6 +28,13 @@ function ReportPage() {
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
 
+    // 현재 이미지 개수와 새로 추가할 이미지 개수 확인
+    if (images.length + files.length > 3) {
+      alert("이미지는 최대 3개까지만 업로드할 수 있습니다.");
+      e.target.value = ""; // 동일한 파일을 다시 선택할 수 있도록 초기화
+      return;
+    }
+
     Promise.all(
       files.map((file) => {
         return new Promise((resolve, reject) => {
@@ -235,17 +242,22 @@ function ReportPage() {
                   </button>
                 </div>
               ))}
-              <label htmlFor="imageUpload" style={styles.uploadButton}>
-                +
-              </label>
-              <input
-                id="imageUpload"
-                type="file"
-                accept="image/*"
-                multiple
-                style={{ display: "none" }}
-                onChange={handleImageUpload}
-              />
+              {/* 이미지가 3개 미만일 때만 추가 버튼 보이기 */}
+              {images.length < 3 && (
+                <>
+                  <label htmlFor="imageUpload" style={styles.uploadButton}>
+                    +
+                  </label>
+                  <input
+                    id="imageUpload"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    style={{ display: "none" }}
+                    onChange={handleImageUpload}
+                  />
+                </>
+              )}
             </div>
           </div>
 
