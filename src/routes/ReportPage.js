@@ -35,32 +35,6 @@ function ReportPage() {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
-  // const searchAddress = () => {
-  //   if (!addressInput.trim()) return;
-
-  //   // const geocoder = new window.kakao.maps.services.Geocoder();
-  //   // geocoder.addressSearch(addressInput, (result, status) => {
-  //   //   if (status === window.kakao.maps.services.Status.OK) {
-  //   //     setAddressResults(result); // 검색 결과 저장
-  //   //     setIsModalOpen(true); // 모달 열기
-  //   //   } else {
-  //   //     alert("주소 검색에 실패했습니다. 다시 시도해주세요.");
-  //   //   }
-  //   // });
-
-  //   const ps = new window.kakao.maps.services.Places(); // 장소 검색 객체 생성
-  //   ps.keywordSearch(addressInput, (data, status) => {
-  //     if (status === window.kakao.maps.services.Status.OK) {
-  //       setAddressResults(data); // 검색 결과 저장
-  //       setIsModalOpen(true); // 모달 열기
-  //     } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
-  //       alert("검색 결과가 없습니다. 다른 키워드를 입력해보세요.");
-  //     } else {
-  //       alert("검색 중 오류가 발생했습니다. 다시 시도해주세요.");
-  //     }
-  //   });
-  // };
-
   const searchAddress = () => {
     if (!addressInput.trim()) return;
 
