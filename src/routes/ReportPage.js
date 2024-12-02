@@ -16,6 +16,9 @@ function ReportPage() {
   const [addressInput, setAddressInput] = useState(""); // 주소 검색 입력
 
   useEffect(() => {
+    const now = new Date();
+    setDiscoveredDate(now.toISOString().split("T")[0]);
+    setDiscoveredTime(now.toTimeString().substring(0, 5));
     document.body.style.backgroundColor = "#d9d3c3";
     return () => {
       document.body.style.backgroundColor = "";
