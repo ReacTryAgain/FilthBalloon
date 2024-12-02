@@ -181,8 +181,9 @@ const styles = {
     flex: "1",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "flex-start", // 왼쪽 정렬
     minWidth: "200px",
+    // border: "1px solid",
   },
   textContainer: {
     flex: "2",
@@ -193,6 +194,7 @@ const styles = {
     alignItems: "flex-start", // 왼쪽 정렬
     minWidth: "400px",
     maxWidth: "500px",
+    // border: "1px solid",
   },
 
   // SidebarComponent 스타일
@@ -212,6 +214,17 @@ const styles = {
     transition: "background-color 0.3s",
     width: "150px",
     textAlign: "center",
+  },
+  placeholder: {
+    width: "200px",
+    height: "300px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#e0e0e0", // 회색 배경
+    borderRadius: "8px",
+    fontSize: "14px",
+    color: "#888", // 텍스트 색상
   },
 };
 

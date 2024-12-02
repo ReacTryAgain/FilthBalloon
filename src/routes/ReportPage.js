@@ -23,9 +23,22 @@ function ReportPage() {
   }, []);
 
   const handleImageUpload = (e) => {
-    const files = Array.from(e.target.files); // 업로드된 파일들 배열로 변환
-    const newImages = files.map((file) => URL.createObjectURL(file)); // 파일 URL 생성
-    setImages((prevImages) => [...prevImages, ...newImages]); // 기존 이미지에 추가
+    const files = Array.from(e.target.files);
+
+    Promise.all(
+      files.map((file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result); // Base64 변환
+          reader.onerror = (error) => reject(error);
+          reader.readAsDataURL(file); // Base64로 읽기
+        });
+      })
+    )
+      .then((base64Images) => {
+        setImages((prevImages) => [...prevImages, ...base64Images]);
+      })
+      .catch((error) => console.error("이미지 업로드 중 오류 발생:", error));
 
     e.target.value = ""; // 동일한 파일을 다시 선택할 수 있도록 초기화
   };
@@ -34,32 +47,6 @@ function ReportPage() {
     // 특정 이미지를 삭제
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
-
-  // const searchAddress = () => {
-  //   if (!addressInput.trim()) return;
-
-  //   // const geocoder = new window.kakao.maps.services.Geocoder();
-  //   // geocoder.addressSearch(addressInput, (result, status) => {
-  //   //   if (status === window.kakao.maps.services.Status.OK) {
-  //   //     setAddressResults(result); // 검색 결과 저장
-  //   //     setIsModalOpen(true); // 모달 열기
-  //   //   } else {
-  //   //     alert("주소 검색에 실패했습니다. 다시 시도해주세요.");
-  //   //   }
-  //   // });
-
-  //   const ps = new window.kakao.maps.services.Places(); // 장소 검색 객체 생성
-  //   ps.keywordSearch(addressInput, (data, status) => {
-  //     if (status === window.kakao.maps.services.Status.OK) {
-  //       setAddressResults(data); // 검색 결과 저장
-  //       setIsModalOpen(true); // 모달 열기
-  //     } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
-  //       alert("검색 결과가 없습니다. 다른 키워드를 입력해보세요.");
-  //     } else {
-  //       alert("검색 중 오류가 발생했습니다. 다시 시도해주세요.");
-  //     }
-  //   });
-  // };
 
   const searchAddress = () => {
     if (!addressInput.trim()) return;

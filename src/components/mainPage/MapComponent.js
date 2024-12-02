@@ -20,7 +20,7 @@ function MapComponent() {
 
         const container = document.getElementById("map");
         const options = {
-          center: new window.kakao.maps.LatLng(37.566535, 126.9779692),
+          center: new window.kakao.maps.LatLng(37.556535, 127.0079692),
           level: 7,
         };
         const kakaoMap = new window.kakao.maps.Map(container, options);
@@ -101,21 +101,25 @@ function MapComponent() {
         <div id="map" style={{ width: "100%", height: "100%" }}></div>
         <Modal isOpen={isModalOpen} onClose={closeModal}>
           {selectedReport && (
-            <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
+            <div style={{ display: "flex", flexDirection: "row", gap: "50px" }}>
               <div style={styles.imageContainer}>
-                {selectedReport.images && (
+                {selectedReport.images && selectedReport.images.length > 0 ? (
                   <img
                     src={selectedReport.images[0]}
-                    alt="이미지 없음"
+                    alt="발견된 이미지"
                     style={{
-                      maxWidth: "200px", // 너비 제한
-                      maxHeight: "300px", // 높이 제한 추가
-                      width: "auto", // 너비 자동 조정
-                      height: "auto", // 높이 자동 조정
-                      objectFit: "cover", // 이미지를 컨테이너에 맞게 크롭
-                      borderRadius: "8px", // 모서리 둥글게
+                      maxWidth: "200px",
+                      maxHeight: "300px",
+                      width: "auto",
+                      height: "auto",
+                      objectFit: "cover",
+                      borderRadius: "8px",
                     }}
                   />
+                ) : (
+                  <div style={styles.placeholder}>
+                    <p>이미지 없음</p>
+                  </div>
                 )}
               </div>
               <div style={styles.textContainer}>
