@@ -101,8 +101,8 @@ function MapComponent() {
 
   return (
     <div style={styles.mapSection}>
-      <div style={{ position: "relative", height: "100vh" }}>
-        <div id="map" style={{ width: "100%", height: "800px" }}></div>
+      <div style={{ position: "relative", height: "100%" }}>
+        <div id="map" style={{ width: "1270px", height: "100%" }}></div>
         <Modal isOpen={isModalOpen} onClose={closeModal}>
           {selectedReport && (
             <div>
