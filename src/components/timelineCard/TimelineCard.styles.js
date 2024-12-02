@@ -15,15 +15,35 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-start",
+    alignItems: "center", // 세로축 정렬을 중앙으로
     gap: "20px",
+    position: "relative",
+  },
+  deleteButton: {
+    position: "absolute", // 위치를 부모 기준으로 설정
+    left: "10px", // 왼쪽 여백
+    top: "50%", // 부모 컨테이너 높이의 중간
+    transform: "translateY(-50%)", // 정확한 세로 중앙 정렬
+    color: "white",
+    border: "none",
+    borderRadius: "50%", // 동그란 버튼
+    width: "35px",
+    height: "35px",
+    fontSize: "16px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",
   },
   leftSection: {
-    flex: 2,
+    flex: 1.5,
     display: "flex",
     flexDirection: "column",
     gap: "10px",
+    marginLeft: "70px", // 휴지통 아이콘의 공간 확보
+    // border: "1px solid",
   },
+
   alertSection: {
     display: "flex",
     justifyContent: "flex-start",
@@ -74,12 +94,13 @@ const styles = {
     color: "#777",
   },
   rightSection: {
-    flex: 1,
+    flex: 1.8,
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     gap: "10px",
     marginLeft: "auto",
+    // border: "1px solid",
   },
   timelineImages: {
     display: "flex",

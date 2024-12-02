@@ -15,6 +15,11 @@ export default function LoginComponent() {
   useEffect(() => {
     const storedUsername = localStorage.getItem("nickname");
     console.log("Stored nickname:", storedUsername);
+
+    // 로컬 스토리지에서 저장된 유저 정보 확인
+    const allUsers = JSON.parse(localStorage.getItem("users"));
+    console.log("All registered users:", allUsers);
+
     if (storedUsername) {
       setIsLoggedIn(true);
       setUsername(storedUsername);

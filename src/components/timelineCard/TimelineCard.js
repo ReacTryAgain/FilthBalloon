@@ -7,11 +7,16 @@ const TimelineCard = ({
   dateSubmitted,
   dateFound,
   images,
+  onDelete,
 }) => {
   return (
     <div style={styles.timelineCardContent}>
       <hr style={styles.divider} />
       <div style={styles.timelineCardMain}>
+        {/* 휴지통 아이콘 */}
+        <button style={styles.deleteButton} onClick={onDelete}>
+          🗑️
+        </button>
         {/* Left Section */}
         <div style={styles.leftSection}>
           <div style={styles.alertSection}>
