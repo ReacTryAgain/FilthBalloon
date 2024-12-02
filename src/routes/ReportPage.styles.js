@@ -171,18 +171,33 @@ const styles = {
     listStyleType: "none",
     padding: 0,
     margin: 0,
+    maxHeight: "300px", // 스크롤 제한
+    overflowY: "auto", // 스크롤 활성화
+    border: "1px solid #ddd", // 테두리 추가
+    borderRadius: "8px",
+    backgroundColor: "#f9f9f9",
   },
   addressItem: {
-    padding: "10px",
-    borderBottom: "1px solid #ccc",
+    padding: "15px",
+    borderBottom: "1px solid #eaeaea",
     cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    transition: "background-color 0.3s, transform 0.2s", // hover 시 효과
   },
-  scrollContainer: {
-    maxHeight: '500px', 
-    overflowY: 'auto',  
-    border: '1px solid #ccc',
-    borderRadius: '8px', 
-    padding: '8px', 
+  addressItemHover: {
+    backgroundColor: "#ececec", // hover 시 배경색
+    transform: "scale(1.02)", // hover 시 확대
+  },
+  addressItemText: {
+    flex: "1",
+    fontSize: "14px",
+    color: "#333",
+  },
+  addressItemIcon: {
+    fontSize: "20px",
+    color: "#8b5e3c",
   },
 };
 

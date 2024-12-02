@@ -63,6 +63,7 @@ function ReportPage() {
 
     const geocoder = new window.kakao.maps.services.Geocoder();
     const places = new window.kakao.maps.services.Places();
+
     let combinedResults = []; // 두 검색 결과를 저장할 배열
 
     // 1. 주소 검색 (addressSearch)
@@ -277,23 +278,41 @@ function ReportPage() {
                 X
               </button>
               <h2>주소 검색 결과</h2>
-              <div style={styles.scrollContainer}>
               {addressResults.length > 0 ? (
                 <ul style={styles.addressList}>
                   {addressResults.map((address, index) => (
                     <li
                       key={index}
-                      style={styles.addressItem}
+                      style={{
+                        ...styles.addressItem,
+                        ...(address.isHovered ? styles.addressItemHover : {}),
+                      }}
+                      onMouseEnter={() =>
+                        setAddressResults((prev) =>
+                          prev.map((item, i) =>
+                            i === index ? { ...item, isHovered: true } : item
+                          )
+                        )
+                      }
+                      onMouseLeave={() =>
+                        setAddressResults((prev) =>
+                          prev.map((item, i) =>
+                            i === index ? { ...item, isHovered: false } : item
+                          )
+                        )
+                      }
                       onClick={() => handleSelectAddress(address)}
                     >
-                      {address.address_name}
+                      <span style={styles.addressItemIcon}>📍</span>
+                      <span style={styles.addressItemText}>
+                        {address.address_name}
+                      </span>
                     </li>
                   ))}
                 </ul>
               ) : (
                 <p>검색된 주소가 없습니다.</p>
               )}
-              </div>
             </div>
           </div>
         )}
