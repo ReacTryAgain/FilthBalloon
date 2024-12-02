@@ -278,6 +278,7 @@ function ReportPage() {
                 X
               </button>
               <h2>주소 검색 결과</h2>
+              <div style={styles.scrollContainer}>
               {addressResults.length > 0 ? (
                 <ul style={styles.addressList}>
                   {addressResults.map((address, index) => (
@@ -313,6 +314,7 @@ function ReportPage() {
               ) : (
                 <p>검색된 주소가 없습니다.</p>
               )}
+              </div>
             </div>
           </div>
         )}

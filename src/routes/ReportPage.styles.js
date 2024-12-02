@@ -199,6 +199,13 @@ const styles = {
     fontSize: "20px",
     color: "#8b5e3c",
   },
+  scrollContainer: {
+    maxHeight: '500px', 
+    overflowY: 'auto',  
+    border: '1px solid #ccc',
+    borderRadius: '8px', 
+    padding: '8px', 
+  },
 };
 
 export default styles;
