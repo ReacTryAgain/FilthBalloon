@@ -23,9 +23,22 @@ function ReportPage() {
   }, []);
 
   const handleImageUpload = (e) => {
-    const files = Array.from(e.target.files); // 업로드된 파일들 배열로 변환
-    const newImages = files.map((file) => URL.createObjectURL(file)); // 파일 URL 생성
-    setImages((prevImages) => [...prevImages, ...newImages]); // 기존 이미지에 추가
+    const files = Array.from(e.target.files);
+
+    Promise.all(
+      files.map((file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result); // Base64 변환
+          reader.onerror = (error) => reject(error);
+          reader.readAsDataURL(file); // Base64로 읽기
+        });
+      })
+    )
+      .then((base64Images) => {
+        setImages((prevImages) => [...prevImages, ...base64Images]);
+      })
+      .catch((error) => console.error("이미지 업로드 중 오류 발생:", error));
 
     e.target.value = ""; // 동일한 파일을 다시 선택할 수 있도록 초기화
   };
