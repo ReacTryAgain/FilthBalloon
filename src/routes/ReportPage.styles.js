@@ -13,7 +13,7 @@ const styles = {
     paddingTop: "20px",
     backgroundColor: "#d9d3c3",
     textAlign: "center", // 제목 가운데 정렬
-    fontSize: "1.5rem", // 제목 크기 조정
+    fontSize: "2rem", // 제목 크기 조정
   },
   container: {
     backgroundColor: "#d7c3a7",

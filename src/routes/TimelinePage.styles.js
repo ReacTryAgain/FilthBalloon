@@ -8,8 +8,10 @@ const styles = {
     fontWeight: "bold",
     marginBottom: "20px",
     marginTop: "0", // 여백을 0으로 설정
-    paddingTop: "0", // padding으로 대체
+    paddingTop: "20px", // padding으로 대체
     backgroundColor: "#d9d3c3", // 필요 시 여기에 배경색 추가
+    textAlign: "center", // 제목 가운데 정렬
+    fontSize: "2rem", // 제목 크기 조정
   },
   reportContainer: {
     backgroundColor: "#d7c3a7",

@@ -369,7 +369,7 @@ function GamePage() {
           padding: "20px",
         }}
       >
-        <h1 style={{ fontSize: "2.5rem", fontWeight: "bold", color: "#000" }}>
+        <h1 style={{ fontSize: "2rem", fontWeight: "bold", color: "#000" }}>
           Trash Hunt: 오물피하기 게임
         </h1>
         {!gameStarted && (
