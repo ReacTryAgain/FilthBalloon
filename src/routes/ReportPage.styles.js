@@ -3,7 +3,7 @@ const styles = {
     paddingLeft: "90px",
     paddingRight: "90px",
     backgroundColor: "#d9d3c3", // 배경색
-    maxWidth: "800px", // 전체 페이지의 너비 제한
+    maxWidth: "1000px", // 전체 페이지의 너비 제한
     margin: "0 auto", // 가운데 정렬
   },
   pageTitle: {
@@ -25,6 +25,7 @@ const styles = {
   inlineGroup: {
     display: "flex",
     alignItems: "center",
+    marginTop: "20px",
     marginBottom: "20px",
     gap: "10px",
     flexWrap: "wrap", // 작은 화면에서 줄바꿈 허용
@@ -43,7 +44,7 @@ const styles = {
     fontSize: "14px",
     backgroundColor: "#ffffff",
     width: "calc(100% - 140px)", // input 크기 제한
-    maxWidth: "400px", // 최대 크기 설정
+    maxWidth: "720px", // 최대 크기 설정
   },
   textarea: {
     flex: "1",
@@ -53,7 +54,7 @@ const styles = {
     fontSize: "14px",
     backgroundColor: "#ffffff",
     height: "100px", // 텍스트 영역의 높이
-    maxWidth: "600px", // 최대 크기 제한
+    maxWidth: "800px", // 최대 크기 제한
     width: "100%",
   },
   searchButton: {
@@ -129,6 +130,7 @@ const styles = {
   submitButton: {
     width: "100%",
     padding: "10px",
+    marginTop: "20px",
     backgroundColor: "#8b5e3c",
     color: "#ffffff",
     border: "none",

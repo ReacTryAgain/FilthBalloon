@@ -64,6 +64,8 @@ const styles = {
     border: '1px solid #ccc',
     borderRadius: '8px', 
     padding: '8px', 
+    scrollbarWidth: "thin", // Firefox에서 스크롤바 얇게 설정
+    scrollbarColor: "#8B5E3C #E5D5C0", // Firefox에서 스크롤바 색상 (#8B5E3C: 손잡이, #E5D5C0: 트랙)
   },
 };
 
