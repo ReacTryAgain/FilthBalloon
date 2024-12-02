@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // React Router import 추가
 import Header from "../components/header/Header";
 import styles from "./ReportPage.styles.js"; // 스타일 가져오기
 
 function ReportPage() {
-  const [city, setCity] = useState("");
-  const [district, setDistrict] = useState("");
-  const [subDistrict, setSubDistrict] = useState("");
+  const navigate = useNavigate(); // 네비게이션 훅 사용
+  const [addressDetail, setAddressDetail] = useState(""); // 상세주소 추가
   const [description, setDescription] = useState("");
-  const [discoveredDate, setDiscoveredDate] = useState(""); // 날짜
-  const [discoveredTime, setDiscoveredTime] = useState(""); // 시간
-  const [images, setImages] = useState([]); // 여러 이미지를 저장할 배열
+  const [discoveredDate, setDiscoveredDate] = useState("");
+  const [discoveredTime, setDiscoveredTime] = useState("");
+  const [images, setImages] = useState([]);
+
+  const [addressResults, setAddressResults] = useState([]); // 검색 결과 저장
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
+  const [addressInput, setAddressInput] = useState(""); // 주소 검색 입력
 
   useEffect(() => {
-    // body 배경색 설정
-    document.body.style.backgroundColor = "#d9d3c3"; // 배경색 설정
+    document.body.style.backgroundColor = "#d9d3c3";
     return () => {
-      document.body.style.backgroundColor = ""; // 컴포넌트 언마운트 시 초기화
+      document.body.style.backgroundColor = "";
     };
   }, []);
 
@@ -32,44 +35,89 @@ function ReportPage() {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
-  const handleSubmit = () => {
-    // 유효성 검사: 날짜와 시간이 입력되었는지 확인
-    if (!discoveredDate || !discoveredTime) {
-      alert("발견 날짜와 시간을 모두 입력해주세요."); // 사용자에게 경고
-      return; // 함수 종료
+  const searchAddress = () => {
+    if (!addressInput.trim()) return;
+
+    const geocoder = new window.kakao.maps.services.Geocoder();
+    geocoder.addressSearch(addressInput, (result, status) => {
+      if (status === window.kakao.maps.services.Status.OK) {
+        setAddressResults(result); // 검색 결과 저장
+        setIsModalOpen(true); // 모달 열기
+      } else {
+        alert("주소 검색에 실패했습니다. 다시 시도해주세요.");
+      }
+    });
+  };
+
+  const handleSelectAddress = (selectedAddress) => {
+    setAddressInput(selectedAddress.address_name); // 선택된 주소를 입력 필드에 반영
+    setIsModalOpen(false); // 모달 닫기
+  };
+
+  const handleSubmit = async () => {
+    if (!addressInput) {
+      alert("주소를 입력하고 선택해주세요.");
+      return;
     }
-    const discoveredDateTime = new Date(`${discoveredDate}T${discoveredTime}`).toISOString();
-    // 작성한 내용과 작성 시각을 로컬 스토리지에 저장
-    const currentTime = new Date().toISOString(); // 현재 시각 기록
+
+    const validation = await validateAddress(addressInput);
+
+    if (!validation.valid) {
+      alert("입력한 주소가 유효하지 않습니다. 다시 확인해주세요.");
+      return;
+    }
+
+    if (!discoveredDate || !discoveredTime) {
+      alert("발견 날짜와 시간을 모두 입력해주세요.");
+      return;
+    }
+
     const reportData = {
-      city,
-      district,
-      subDistrict,
+      addressInput, //
+      addressDetail, // 상세주소 추가
       description,
       discoveredDate,
       discoveredTime,
       images,
-      createdAt: currentTime, // 작성 시각 추가
+      coordinates: validation.coordinates,
+      createdAt: new Date().toISOString(),
     };
 
-    // 기존 데이터 가져오기
     const existingReports = JSON.parse(localStorage.getItem("reports")) || [];
     const updatedReports = [...existingReports, reportData];
-    
-    // 로컬 스토리지에 저장
+
     localStorage.setItem("reports", JSON.stringify(updatedReports));
 
     alert("제보가 성공적으로 저장되었습니다!");
     console.log("Saved Report Data:", reportData);
 
-    // 입력값 초기화
-    setCity("");
-    setDistrict("");
-    setSubDistrict("");
-    setDescription("");
-    setDiscoveredDate("");
-    setDiscoveredTime("");
-    setImages([]);
+    // 메인 페이지로 이동
+    navigate("/"); // "/main" 경로로 이동 (적절한 경로로 수정 필요)
+
+    // setAddressDetail(""); // 상세주소 초기화
+    // setDescription("");
+    // setDiscoveredDate("");
+    // setDiscoveredTime("");
+    // setImages([]);
+  };
+
+  const validateAddress = async (address) => {
+    return new Promise((resolve) => {
+      const geocoder = new window.kakao.maps.services.Geocoder();
+      geocoder.addressSearch(address, (result, status) => {
+        if (status === window.kakao.maps.services.Status.OK) {
+          resolve({
+            valid: true,
+            coordinates: {
+              latitude: result[0].y,
+              longitude: result[0].x,
+            },
+          });
+        } else {
+          resolve({ valid: false });
+        }
+      });
+    });
   };
 
   return (
@@ -77,32 +125,33 @@ function ReportPage() {
       <Header />
       <div style={styles.reportPage}>
         <h1 style={styles.pageTitle}>Trash Hunt : 오물풍선 제보하기</h1>
+
         <div style={styles.container}>
-          {/* 낙하위치 */}
+          {/* 주소 검색 */}
           <div style={styles.inlineGroup}>
-            <label style={styles.inlineLabel}>낙하위치:</label>
+            <label style={styles.inlineLabel}>주소 검색:</label>
             <input
               style={styles.input}
               type="text"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
+              value={addressInput}
+              onChange={(e) => setAddressInput(e.target.value)}
+              placeholder="도로명 주소 또는 지번 주소 입력"
             />
-            시
-            <input
-              style={styles.input}
-              type="text"
-              value={district}
-              onChange={(e) => setDistrict(e.target.value)}
-            />
-            구
-            <input
-              style={styles.input}
-              type="text"
-              value={subDistrict}
-              onChange={(e) => setSubDistrict(e.target.value)}
-            />
-            동
+            <button style={styles.searchButton} onClick={searchAddress}>
+              검색
+            </button>
           </div>
+          <div style={styles.inlineGroup}>
+            <label style={styles.inlineLabel}>상세주소:</label>
+            <input
+              style={styles.input}
+              type="text"
+              value={addressDetail}
+              onChange={(e) => setAddressDetail(e.target.value)}
+              placeholder="예) 아파트, 건물 이름, 층/호수 등"
+            />
+          </div>
+
           <hr style={styles.divider} />
 
           {/* 상세설명 */}
@@ -122,13 +171,13 @@ function ReportPage() {
             <label style={styles.inlineLabel}>발견 시각:</label>
             <input
               style={styles.input}
-              type="date" // 날짜 입력
+              type="date"
               value={discoveredDate}
               onChange={(e) => setDiscoveredDate(e.target.value)}
             />
             <input
               style={styles.input}
-              type="time" // 시간 입력
+              type="time"
               value={discoveredTime}
               onChange={(e) => setDiscoveredTime(e.target.value)}
             />
@@ -141,7 +190,11 @@ function ReportPage() {
             <div style={styles.imageUploadContainer}>
               {images.map((image, index) => (
                 <div key={index} style={styles.imagePreviewContainer}>
-                  <img src={image} alt={`미리보기 ${index}`} style={styles.imagePreview} />
+                  <img
+                    src={image}
+                    alt={`미리보기 ${index}`}
+                    style={styles.imagePreview}
+                  />
                   <button
                     style={styles.removeButton}
                     onClick={() => handleImageRemove(index)}
@@ -157,7 +210,7 @@ function ReportPage() {
                 id="imageUpload"
                 type="file"
                 accept="image/*"
-                multiple // 다중 업로드 가능
+                multiple
                 style={{ display: "none" }}
                 onChange={handleImageUpload}
               />
@@ -169,6 +222,35 @@ function ReportPage() {
             등록
           </button>
         </div>
+        {/* 주소 검색 결과 모달 */}
+        {isModalOpen && (
+          <div style={styles.modalOverlay}>
+            <div style={styles.modalContent}>
+              <button
+                style={styles.closeButton}
+                onClick={() => setIsModalOpen(false)}
+              >
+                X
+              </button>
+              <h2>주소 검색 결과</h2>
+              {addressResults.length > 0 ? (
+                <ul style={styles.addressList}>
+                  {addressResults.map((address, index) => (
+                    <li
+                      key={index}
+                      style={styles.addressItem}
+                      onClick={() => handleSelectAddress(address)}
+                    >
+                      {address.address_name}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>검색된 주소가 없습니다.</p>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

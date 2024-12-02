@@ -182,15 +182,17 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    minWidth: "200px",
   },
   textContainer: {
     flex: "2",
-    marginTop: "30px",
+    marginTop: "20px",
     fontSize: "20px",
     display: "flex", // Flexbox 사용
     flexDirection: "column", // 세로 정렬
-    gap: "10px", // 요소 간 간격
     alignItems: "flex-start", // 왼쪽 정렬
+    minWidth: "400px",
+    maxWidth: "500px",
   },
 
   // SidebarComponent 스타일

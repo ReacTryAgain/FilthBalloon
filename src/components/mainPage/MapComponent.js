@@ -20,10 +20,7 @@ function MapComponent() {
 
         const container = document.getElementById("map");
         const options = {
-          center: new window.kakao.maps.LatLng(
-            37.574587659983,
-            129.89005991945
-          ),
+          center: new window.kakao.maps.LatLng(37.566535, 126.9779692),
           level: 7,
         };
         const kakaoMap = new window.kakao.maps.Map(container, options);
@@ -57,45 +54,44 @@ function MapComponent() {
 
     reportsData.forEach((report, index) => {
       const {
-        city,
-        district,
-        subDistrict,
         description,
         discoveredDate,
         discoveredTime,
         images,
+        coordinates, // 위도, 경도 정보
+        addressInput, // 도로명 주소
+        addressDetail, // 상세주소
       } = report;
-      const address = `${city} ${district} ${subDistrict}`;
 
-      geocoder.addressSearch(address, (result, status) => {
-        // console.log(`Report ${index + 1} 주소 검색 결과:`, result);
-        // console.log(`Report ${index + 1} 상태:`, status);
+      if (coordinates && coordinates.latitude && coordinates.longitude) {
+        const coords = new window.kakao.maps.LatLng(
+          coordinates.latitude,
+          coordinates.longitude
+        );
+        const marker = new window.kakao.maps.Marker({
+          position: coords,
+        });
+        marker.setMap(kakaoMap);
 
-        if (status === window.kakao.maps.services.Status.OK) {
-          const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-          const marker = new window.kakao.maps.Marker({
-            position: coords,
+        window.kakao.maps.event.addListener(marker, "click", () => {
+          setSelectedReport({
+            description,
+            discoveredDate,
+            discoveredTime,
+            images,
+            address: `${addressInput} ${addressDetail}`,
           });
-          marker.setMap(kakaoMap);
+          openModal();
+        });
 
-          window.kakao.maps.event.addListener(marker, "click", () => {
-            setSelectedReport({
-              description,
-              discoveredDate,
-              discoveredTime,
-              images,
-              address: `${city}시 ${district}구 ${subDistrict}동`,
-            });
-            openModal();
-          });
-
-          if (index === 0) {
-            kakaoMap.setCenter(coords);
-          }
-        } else {
-          console.error(`주소 검색 실패 (Report ${index + 1}):`, status);
+        if (index === 0) {
+          kakaoMap.setCenter(coords);
         }
-      });
+      } else {
+        console.error(
+          `Report ${index + 1}에 유효한 coordinates 정보가 없습니다.`
+        );
+      }
     });
   };
 
@@ -105,12 +101,12 @@ function MapComponent() {
         <div id="map" style={{ width: "100%", height: "100%" }}></div>
         <Modal isOpen={isModalOpen} onClose={closeModal}>
           {selectedReport && (
-            <div style={{ display: "flex", flexDirection: "row", gap: "80px" }}>
+            <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
               <div style={styles.imageContainer}>
-                {selectedReport.images && selectedReport.images.length > 0 && (
+                {selectedReport.images && (
                   <img
                     src={selectedReport.images[0]}
-                    alt="발견된 이미지"
+                    alt="이미지 없음"
                     style={{
                       maxWidth: "200px", // 너비 제한
                       maxHeight: "300px", // 높이 제한 추가
