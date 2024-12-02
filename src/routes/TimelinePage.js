@@ -10,7 +10,7 @@ const TimelinePage = () => {
     // 로컬 스토리지에서 데이터 불러오기
     const storedReports = JSON.parse(localStorage.getItem("reports")) || [];
     const formattedReports = storedReports.map((report) => ({
-      title: `${report.city} ${report.district} ${report.subDistrict}`,
+      title: `${report.addressInput} ${report.addressDetail}`,
       description: report.description,
       dateSubmitted: new Date(report.createdAt).toLocaleString(),
       dateFound: `${report.discoveredDate} ${report.discoveredTime}`,
@@ -26,6 +26,13 @@ const TimelinePage = () => {
       document.body.style.backgroundColor = ""; // 컴포넌트 언마운트 시 초기화
     };
   }, []);
+
+  const handleClearAll = () => {
+    // 전체 데이터 삭제
+    localStorage.clear();
+    setData([]); // 상태 초기화
+    alert("로컬 스토리지의 모든 데이터가 삭제되었습니다!");
+  };
 
   // 데이터가 없을 경우 처리
   if (data.length === 0) {
@@ -43,17 +50,16 @@ const TimelinePage = () => {
   // 마지막 업데이트
   const lastUpdate = data[0]?.dateSubmitted || "N/A";
 
-  const handleClearAll = () => {
-    // 전체 데이터 삭제
-    localStorage.clear();
-    alert("로컬 스토리지의 모든 데이터가 삭제되었습니다!");
-  };
-
   return (
     <>
       <Header />
       <div style={styles.timelinePage}>
-        <h1 style={styles.pageTitle}>Trash Hunt : TIMELINE</h1>
+        <div style={styles.pageHeader}>
+          <h1 style={styles.pageTitle}>Trash Hunt : TIMELINE</h1>
+          <button style={styles.clearButton} onClick={handleClearAll}>
+            전체 데이터 삭제
+          </button>
+        </div>
         <div style={styles.reportContainer}>
           <div style={styles.reportHeader}>
             <span style={styles.reportTitle}>제보된 오물풍선 목록</span>
@@ -72,7 +78,6 @@ const TimelinePage = () => {
           ))}
         </div>
       </div>
-      <button onClick={handleClearAll}>전체 데이터 삭제</button>
     </>
   );
 };

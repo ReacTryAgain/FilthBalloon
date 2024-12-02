@@ -1,7 +1,13 @@
 import React from "react";
 import styles from "./TimelineCard.styles.js";
 
-const TimelineCard = ({ title, description, dateSubmitted, dateFound, images }) => {
+const TimelineCard = ({
+  title,
+  description,
+  dateSubmitted,
+  dateFound,
+  images,
+}) => {
   return (
     <div style={styles.timelineCardContent}>
       <hr style={styles.divider} />
@@ -17,10 +23,8 @@ const TimelineCard = ({ title, description, dateSubmitted, dateFound, images }) 
           <div style={styles.timelineCardLeft}>
             <img src="/오물풍선.png" alt="icon" style={styles.timelineIcon} />
             <div style={styles.timelineInfo}>
-              <div style={styles.timelineInfoHeader}>
-                <h2 style={{ margin: 0 }}>{title}</h2>
-                <span style={styles.description}>{description}</span>
-              </div>
+              <h2 style={styles.timelineInfoHeader}>{title}</h2>
+              <span style={styles.description}>{description}</span>
               <p style={styles.timelineInfoText}>제보 시각: {dateSubmitted}</p>
               <p style={styles.timelineInfoText}>발견 시각: {dateFound}</p>
             </div>
@@ -29,15 +33,23 @@ const TimelineCard = ({ title, description, dateSubmitted, dateFound, images }) 
 
         {/* Right Section */}
         <div style={styles.rightSection}>
-          <div style={styles.timelineImages}>
-            {images.map((imgUrl, index) => (
-              <img key={index} src={imgUrl} alt={`사진 ${index + 1}`} style={styles.image} />
-            ))}
-          </div>
+          {images && images.length > 0 ? (
+            <div style={styles.timelineImages}>
+              {images.map((imgUrl, index) => (
+                <img
+                  key={index}
+                  src={imgUrl}
+                  alt={`사진 ${index + 1}`}
+                  style={styles.image}
+                />
+              ))}
+            </div>
+          ) : (
+            <div style={styles.noImagePlaceholder}>이미지 없음</div>
+          )}
         </div>
       </div>
     </div>
-
   );
 };
 
