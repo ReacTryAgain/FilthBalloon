@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# :balloon: Trash Hunt:
+본 오물풍선 웹 서비스 "Trash Hunt"는 북한이 무단으로 살포한 오물풍선의 위치 정보를 제공하여 사용자가 쉽게 상황을 파악할 수 있도록 돕는 종합적인 플랫폼입니다. 오물풍선은 단순한 쓰레기 문제를 넘어, 생화학적, 바이러스적 위험을 동반한 심각한 위협으로 간주되어야 하며, 이에 대한 경각심과 대응책 마련에 도움이 되기 위해 개발하게 되었습니다.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br/>
 
-## Available Scripts
+## 👉🏻 주요 기능
+- 오물풍선 제보 기능 : 오물풍선의 발견 위치, 시각, 상세 정보, 사진을 여러 사람들과 공유하기 위해 제보할 수 있습니다.
+- 오물풍선 타임라인 기능 : 제보된 오물풍선에 관련한 정보들을 확인할 수 있습니다.
+- 카카오 API 지도 맵 : 제보된 오물풍선의 위치를 지도에 표시함으로써 시각적으로 확인할 수 있습니다.
+- 오물풍선 피하기 게임 : 저희 오물풍선 웹 서비스에 대한 관심을 가질 수 있고 위험성을 인지할 수 있습니다.
 
-In the project directory, you can run:
+<br/>
 
-### `npm start`
+## 👉🏻 실행 방법
+1. vscode에 FilthBalloon 폴더 불러오기
+2. npm install
+3. npm start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br/>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📝 페이지 구성
+<details>
+<summary>메인 페이지</summary>
+<div markdown="1">
+ - MainPage: 오물풍선의 위치를 담은 지도, 로그인, 채팅을 활용할 수 있는 메인 페이지
 
-### `npm test`
+  사진 넣으면 될 듯
+</div>
+</details>
+<details>
+<summary>제보 페이지</summary>
+<div markdown="1">
+ - ReportPage: 오물풍선 제보 페이지
+</div>
+</details>
+<details>
+<summary>설명 페이지</summary>
+<div markdown="1">
+ - InfoPage: 오물풍선 설명 페이지
+</div>
+</details>
+<details>
+<summary>타임라인 페이지</summary>
+<div markdown="1">
+ - TimeLinePage: 제보된 오물풍선 정보 페이지
+</div>
+</details>
+<details>
+<summary>소개 페이지</summary>
+<div markdown="1">
+ - AboutPage: 서비스 설명 페이지
+</div>
+</details>
+<details>
+<summary>게임 페이지</summary>
+<div markdown="1">
+ - GamePage: 오물풍선 게임 페이지
+</div>
+</details>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br/>
 
-### `npm run build`
+## 💻 Teachnology
+![js](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
+![html](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![css](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![visual studio code](https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
+![Notion](https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white)
+![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)

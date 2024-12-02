@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import MainPage from "./routes/MainPage";
-import ReportPage from "./routes/ReportPage"; // 새로 추가할 페이지 컴포넌트
+import ReportPage from "./routes/ReportPage"; 
 import InfoPage from "./routes/InfoPage";
 import TimelinePage from "./routes/TimelinePage";
 import AboutPage from "./routes/AboutPage";

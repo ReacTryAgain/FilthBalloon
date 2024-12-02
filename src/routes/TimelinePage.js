@@ -83,6 +83,7 @@ const TimelinePage = () => {
           </div>
           <p style={styles.lastUpdate}>마지막 업데이트 : {lastUpdate}</p>
 
+          <div style={styles.scrollContainer}>
           {data.map((item, index) => (
             <TimelineCard
               key={index}
@@ -94,6 +95,7 @@ const TimelinePage = () => {
               onDelete={() => handleDelete(item.id)} // 삭제 핸들러 전달
             />
           ))}
+          </div>
         </div>
       </div>
     </>
