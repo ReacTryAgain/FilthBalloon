@@ -6,21 +6,24 @@ const styles = {
   },
   pageTitle: {
     fontWeight: "bold",
-    marginBottom: "40px",
+    marginBottom: "20px",
     marginTop: "0", // 여백을 0으로 설정
-    paddingTop: "20px", // padding으로 대체
+    paddingTop: "0", // padding으로 대체
     backgroundColor: "#d9d3c3", // 필요 시 여기에 배경색 추가
   },
   reportContainer: {
     backgroundColor: "#d7c3a7",
     borderRadius: "10px",
     padding: "20px 30px",
-    marginTop: "20px",
+    marginTop: "30px",
+    width: "80%", // 너비를 80%로 설정 (필요에 따라 조정 가능)
+    maxWidth: "900px", // 최대 너비 설정
+    margin: "0 auto", // 중앙 정렬
   },
   reportHeader: {
     display: "flex",
     alignItems: "center",
-    fontSize: "18px",
+    fontSize: "22px",
     fontWeight: "bold",
   },
   reportTitle: {

@@ -15,11 +15,11 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-start",
+    alignItems: "stretch", // 자식 요소 높이를 부모에 맞춰 늘림
     gap: "20px",
   },
   leftSection: {
-    flex: 2,
+    flex: 1.5,
     display: "flex",
     flexDirection: "column",
     gap: "10px",
@@ -74,9 +74,9 @@ const styles = {
     color: "#777",
   },
   rightSection: {
-    flex: 1,
+    flex: 2,
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     gap: "10px",
     marginLeft: "auto",

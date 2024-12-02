@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // React Router import 추가
 import Header from "../components/header/Header";
 import TimelineCard from "../components/timelineCard/TimelineCard.js";
 import styles from "./TimelinePage.styles.js";
 
 const TimelinePage = () => {
+  const navigate = useNavigate(); // 네비게이션 훅 사용
   const [data, setData] = useState([]); // 로컬 스토리지에서 불러온 데이터를 저장
 
   useEffect(() => {
@@ -28,10 +30,11 @@ const TimelinePage = () => {
   }, []);
 
   const handleClearAll = () => {
-    // 전체 데이터 삭제
-    localStorage.clear();
+    // reports 키만 삭제
+    localStorage.removeItem("reports");
     setData([]); // 상태 초기화
-    alert("로컬 스토리지의 모든 데이터가 삭제되었습니다!");
+    alert("제보 내역 모두 삭제");
+    navigate("/");
   };
 
   // 데이터가 없을 경우 처리
@@ -66,6 +69,7 @@ const TimelinePage = () => {
             <span style={styles.reportCount}>{data.length}개</span>
           </div>
           <p style={styles.lastUpdate}>마지막 업데이트 : {lastUpdate}</p>
+
           {data.map((item, index) => (
             <TimelineCard
               key={index}
