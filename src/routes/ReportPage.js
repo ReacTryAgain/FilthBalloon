@@ -81,9 +81,7 @@ function ReportPage() {
         // 중복 제거 및 결과 저장
         const uniqueResults = combinedResults.reduce((acc, current) => {
           const isDuplicate = acc.some(
-            (item) =>
-              item.address_name === current.address_name &&
-              item.place_name === current.place_name
+            (item) => item.address_name === current.address_name
           );
           if (!isDuplicate) acc.push(current);
           return acc;
