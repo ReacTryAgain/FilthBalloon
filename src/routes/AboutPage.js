@@ -9,6 +9,7 @@ function AboutPage() {
       <div style={styles.container}>
         <div style={styles.content}>
           <h2 style={styles.title}>Trash Hunt Service 소개</h2>
+          <br/>
           <div style={styles.descriptionBox}>
             <p style={styles.paragraph}>
               본 오물풍선 웹 서비스 "Trash Hunt"는 북한이 무단으로 살포한 오물풍선의 위치 정보를 제공하여 사용자가 쉽게 상황을 파악할 수 있도록 돕는 종합적인 플랫폼입니다.
@@ -25,6 +26,7 @@ function AboutPage() {
             <p style={styles.paragraph}>
               이 웹 서비스는 사용자의 참여를 독려하고, 실시간 데이터를 바탕으로 북한의 오물풍선의 위험성을 경각심 있게 전달하며, 오물풍선 살포에 대한 경고와 대응책을 마련하는 데 기여하는 중요한 역할을 수행할 것입니다.
             </p>
+
           </div>
         </div>
       </div>
