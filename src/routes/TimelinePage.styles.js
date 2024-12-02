@@ -8,8 +8,10 @@ const styles = {
     fontWeight: "bold",
     marginBottom: "20px",
     marginTop: "0", // 여백을 0으로 설정
-    paddingTop: "0", // padding으로 대체
+    paddingTop: "20px", // padding으로 대체
     backgroundColor: "#d9d3c3", // 필요 시 여기에 배경색 추가
+    textAlign: "center", // 제목 가운데 정렬
+    fontSize: "2rem", // 제목 크기 조정
   },
   reportContainer: {
     backgroundColor: "#d7c3a7",
@@ -57,6 +59,15 @@ const styles = {
     fontWeight: "bold",
     transition: "background-color 0.3s",
     textAlign: "center",
+  },
+  scrollContainer: {
+    maxHeight: '600px', 
+    overflowY: 'auto',  
+    border: '1px solid #ccc',
+    borderRadius: '8px', 
+    padding: '8px', 
+    scrollbarWidth: "thin", // Firefox에서 스크롤바 얇게 설정
+    scrollbarColor: "#8B5E3C #E5D5C0", // Firefox에서 스크롤바 색상 (#8B5E3C: 손잡이, #E5D5C0: 트랙)
   },
 };
 
