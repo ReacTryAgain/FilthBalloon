@@ -102,29 +102,40 @@ function MapComponent() {
   return (
     <div style={styles.mapSection}>
       <div style={{ position: "relative", height: "100%" }}>
-        <div id="map" style={{ width: "1270px", height: "100%" }}></div>
+        <div id="map" style={{ width: "100%", height: "100%" }}></div>
         <Modal isOpen={isModalOpen} onClose={closeModal}>
           {selectedReport && (
-            <div>
-              {selectedReport.images && selectedReport.images.length > 0 && (
-                <img
-                  src={selectedReport.images[0]}
-                  alt="발견된 이미지"
-                  style={{ maxWidth: "100%", borderRadius: "8px" }}
-                />
-              )}
-              <p>
-                <strong>발견 장소:</strong> {selectedReport.address}
-              </p>
-              <p>
-                <strong>상세 설명:</strong> {selectedReport.description}
-              </p>
-              <p>
-                <strong>발견 날짜:</strong> {selectedReport.discoveredDate}
-              </p>
-              <p>
-                <strong>발견 시각:</strong> {selectedReport.discoveredTime}
-              </p>
+            <div style={{ display: "flex", flexDirection: "row", gap: "80px" }}>
+              <div style={styles.imageContainer}>
+                {selectedReport.images && selectedReport.images.length > 0 && (
+                  <img
+                    src={selectedReport.images[0]}
+                    alt="발견된 이미지"
+                    style={{
+                      maxWidth: "200px", // 너비 제한
+                      maxHeight: "300px", // 높이 제한 추가
+                      width: "auto", // 너비 자동 조정
+                      height: "auto", // 높이 자동 조정
+                      objectFit: "cover", // 이미지를 컨테이너에 맞게 크롭
+                      borderRadius: "8px", // 모서리 둥글게
+                    }}
+                  />
+                )}
+              </div>
+              <div style={styles.textContainer}>
+                <p>
+                  <strong>발견 장소:</strong> {selectedReport.address}
+                </p>
+                <p>
+                  <strong>상세 설명:</strong> {selectedReport.description}
+                </p>
+                <p>
+                  <strong>발견 날짜:</strong> {selectedReport.discoveredDate}
+                </p>
+                <p>
+                  <strong>발견 시각:</strong> {selectedReport.discoveredTime}
+                </p>
+              </div>
             </div>
           )}
         </Modal>

@@ -177,6 +177,21 @@ const styles = {
     marginBottom: "10px",
     borderRadius: "10px",
   },
+  imageContainer: {
+    flex: "1",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textContainer: {
+    flex: "2",
+    marginTop: "30px",
+    fontSize: "20px",
+    display: "flex", // Flexbox 사용
+    flexDirection: "column", // 세로 정렬
+    gap: "10px", // 요소 간 간격
+    alignItems: "flex-start", // 왼쪽 정렬
+  },
 
   // SidebarComponent 스타일
   rightSidebar: {
