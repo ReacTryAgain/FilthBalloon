@@ -160,7 +160,7 @@ const styles = {
   mapSection: {
     flexGrow: 1,
     margin: "0 20px",
-    height: "600px",
+    height: "790px",
   },
   mapBox: {
     backgroundColor: "#d1bda9", // 배경색 확인
@@ -177,16 +177,22 @@ const styles = {
     marginBottom: "10px",
     borderRadius: "10px",
   },
-  mapDescription: {
-    backgroundColor: "#ffffff",
-    padding: "20px",
-    width: "100%",
-    minHeight: "130px", // 최소 높이 설정
-    boxSizing: "border-box",
-    borderRadius: "10px",
-    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // 그림자 효과
-    marginTop: "10px",
-    overflowY: "auto", // 내용이 넘칠 경우 스크롤
+  imageContainer: {
+    flex: "1",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minWidth: "200px",
+  },
+  textContainer: {
+    flex: "2",
+    marginTop: "20px",
+    fontSize: "20px",
+    display: "flex", // Flexbox 사용
+    flexDirection: "column", // 세로 정렬
+    alignItems: "flex-start", // 왼쪽 정렬
+    minWidth: "400px",
+    maxWidth: "500px",
   },
 
   // SidebarComponent 스타일

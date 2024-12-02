@@ -20,10 +20,7 @@ function MapComponent() {
 
         const container = document.getElementById("map");
         const options = {
-          center: new window.kakao.maps.LatLng(
-            37.574587659983,
-            129.89005991945
-          ),
+          center: new window.kakao.maps.LatLng(37.566535, 126.9779692),
           level: 7,
         };
         const kakaoMap = new window.kakao.maps.Map(container, options);
@@ -57,74 +54,84 @@ function MapComponent() {
 
     reportsData.forEach((report, index) => {
       const {
-        city,
-        district,
-        subDistrict,
         description,
         discoveredDate,
         discoveredTime,
         images,
+        coordinates, // 위도, 경도 정보
+        addressInput, // 도로명 주소
+        addressDetail, // 상세주소
       } = report;
-      const address = `${city} ${district} ${subDistrict}`;
 
-      geocoder.addressSearch(address, (result, status) => {
-        // console.log(`Report ${index + 1} 주소 검색 결과:`, result);
-        // console.log(`Report ${index + 1} 상태:`, status);
+      if (coordinates && coordinates.latitude && coordinates.longitude) {
+        const coords = new window.kakao.maps.LatLng(
+          coordinates.latitude,
+          coordinates.longitude
+        );
+        const marker = new window.kakao.maps.Marker({
+          position: coords,
+        });
+        marker.setMap(kakaoMap);
 
-        if (status === window.kakao.maps.services.Status.OK) {
-          const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-          const marker = new window.kakao.maps.Marker({
-            position: coords,
+        window.kakao.maps.event.addListener(marker, "click", () => {
+          setSelectedReport({
+            description,
+            discoveredDate,
+            discoveredTime,
+            images,
+            address: `${addressInput} ${addressDetail}`,
           });
-          marker.setMap(kakaoMap);
+          openModal();
+        });
 
-          window.kakao.maps.event.addListener(marker, "click", () => {
-            setSelectedReport({
-              description,
-              discoveredDate,
-              discoveredTime,
-              images,
-              address: `${city}시 ${district}구 ${subDistrict}동`,
-            });
-            openModal();
-          });
-
-          if (index === 0) {
-            kakaoMap.setCenter(coords);
-          }
-        } else {
-          console.error(`주소 검색 실패 (Report ${index + 1}):`, status);
+        if (index === 0) {
+          kakaoMap.setCenter(coords);
         }
-      });
+      } else {
+        console.error(
+          `Report ${index + 1}에 유효한 coordinates 정보가 없습니다.`
+        );
+      }
     });
   };
 
   return (
     <div style={styles.mapSection}>
-      <div style={{ position: "relative", height: "100vh" }}>
-        <div id="map" style={{ width: "100%", height: "800px" }}></div>
+      <div style={{ position: "relative", height: "100%" }}>
+        <div id="map" style={{ width: "100%", height: "100%" }}></div>
         <Modal isOpen={isModalOpen} onClose={closeModal}>
           {selectedReport && (
-            <div>
-              {selectedReport.images && selectedReport.images.length > 0 && (
-                <img
-                  src={selectedReport.images[0]}
-                  alt="발견된 이미지"
-                  style={{ maxWidth: "100%", borderRadius: "8px" }}
-                />
-              )}
-              <p>
-                <strong>발견 장소:</strong> {selectedReport.address}
-              </p>
-              <p>
-                <strong>상세 설명:</strong> {selectedReport.description}
-              </p>
-              <p>
-                <strong>발견 날짜:</strong> {selectedReport.discoveredDate}
-              </p>
-              <p>
-                <strong>발견 시각:</strong> {selectedReport.discoveredTime}
-              </p>
+            <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
+              <div style={styles.imageContainer}>
+                {selectedReport.images && (
+                  <img
+                    src={selectedReport.images[0]}
+                    alt="이미지 없음"
+                    style={{
+                      maxWidth: "200px", // 너비 제한
+                      maxHeight: "300px", // 높이 제한 추가
+                      width: "auto", // 너비 자동 조정
+                      height: "auto", // 높이 자동 조정
+                      objectFit: "cover", // 이미지를 컨테이너에 맞게 크롭
+                      borderRadius: "8px", // 모서리 둥글게
+                    }}
+                  />
+                )}
+              </div>
+              <div style={styles.textContainer}>
+                <p>
+                  <strong>발견 장소:</strong> {selectedReport.address}
+                </p>
+                <p>
+                  <strong>상세 설명:</strong> {selectedReport.description}
+                </p>
+                <p>
+                  <strong>발견 날짜:</strong> {selectedReport.discoveredDate}
+                </p>
+                <p>
+                  <strong>발견 시각:</strong> {selectedReport.discoveredTime}
+                </p>
+              </div>
             </div>
           )}
         </Modal>
