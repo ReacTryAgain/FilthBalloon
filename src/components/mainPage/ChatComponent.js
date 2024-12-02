@@ -18,6 +18,7 @@ function ChatComponent() {
     }
   }, []);
 
+  // 로컬스토리지에 채팅 기록 저장
   useEffect(() => {
     if (chatMessages.length > 0) {
       try {
@@ -27,13 +28,11 @@ function ChatComponent() {
       }
     }
   }, [chatMessages]);
-  
 
   const handleSendMessage = () => {
     if (newMessage.trim()) {
       const newChat = {
         text: newMessage,
-        isMine: true,
         username,
         time: new Date().toLocaleTimeString(),
       };
@@ -57,13 +56,14 @@ function ChatComponent() {
             key={index}
             style={{
               ...styles.chatBubble,
-              ...(message.isMine
-                ? styles.chatBubbleRight
-                : styles.chatBubbleLeft),
+              alignSelf: message.username === username ? "flex-end" : "flex-start",
+              backgroundColor: message.username === username ? "#007bff" : "#e4e6eb",
+              color: message.username === username ? "#fff" : "#000",
             }}
           >
             <div style={styles.chatMetadata}>
-              <span style={styles.username}>{message.username}<br /></span>
+              <span style={styles.username}>{message.username}</span>
+              <br />
               <span style={styles.time}>{message.time}</span>
             </div>
             <div style={styles.messageText}>{message.text}</div>
