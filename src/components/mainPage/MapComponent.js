@@ -20,7 +20,7 @@ function MapComponent() {
 
         const container = document.getElementById("map");
         const options = {
-          center: new window.kakao.maps.LatLng(37.566535, 126.9779692),
+          center: new window.kakao.maps.LatLng(37.556535, 127.0079692),
           level: 7,
         };
         const kakaoMap = new window.kakao.maps.Map(container, options);
