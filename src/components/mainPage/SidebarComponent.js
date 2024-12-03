@@ -4,11 +4,12 @@ import { UserContext } from "../../utils/UserContext"; // UserContext 가져오�
 import styles from "./MainPage.styles"; // 통합 스타일 가져오기
 
 function SidebarComponent() {
-  const { isLoggedIn } = useContext(UserContext); // 로그인 상태 가져오기
+  const { user } = useContext(UserContext); // 로그인 상태 가져오기
   const navigate = useNavigate();
 
+  console.log(user.nickname);
   const handleRestrictedNavigation = (path) => {
-    if (isLoggedIn) {
+    if (user.nickname) {
       navigate(path);
     } else {
       alert("로그인이 필요합니다."); // 경고 메시지 표시
