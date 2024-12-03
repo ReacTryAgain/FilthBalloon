@@ -6,12 +6,14 @@ function ChatComponent() {
   const { user } = useContext(UserContext);
   const [chatMessages, setChatMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const username = user?.nickname || "익명"; // 닉네임 없을 때 "익명"으로 표시
+  // 닉네임 설정: userContext에서 가져오거나, localStorage에서 가져오기
+  const username = user?.nickname || localStorage.getItem("nickname") || "익명";
 
   // 로컬스토리지에서 채팅 기록 로드
   useEffect(() => {
     try {
-      const storedMessages = JSON.parse(localStorage.getItem("chatMessages")) || [];
+      const storedMessages =
+        JSON.parse(localStorage.getItem("chatMessages")) || [];
       setChatMessages(storedMessages);
     } catch (error) {
       console.error("Failed to load messages from localStorage:", error);
@@ -56,8 +58,10 @@ function ChatComponent() {
             key={index}
             style={{
               ...styles.chatBubble,
-              alignSelf: message.username === username ? "flex-end" : "flex-start",
-              backgroundColor: message.username === username ? "#007bff" : "#e4e6eb",
+              alignSelf:
+                message.username === username ? "flex-end" : "flex-start",
+              backgroundColor:
+                message.username === username ? "#007bff" : "#e4e6eb",
               color: message.username === username ? "#fff" : "#000",
             }}
           >
