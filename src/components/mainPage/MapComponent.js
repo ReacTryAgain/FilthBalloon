@@ -7,8 +7,7 @@ function MapComponent() {
 
   useEffect(() => {
     const script = document.createElement("script");
-    script.src =
-      "https://dapi.kakao.com/v2/maps/sdk.js?appkey=284fa1317d3a788d1bb87b93733d94fa&autoload=false&libraries=services";
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_MAP_API_KEY}&autoload=false&libraries=services`;
     script.async = true;
     document.head.appendChild(script);
 
