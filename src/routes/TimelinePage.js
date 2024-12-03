@@ -8,7 +8,7 @@ import { UserContext } from "../utils/UserContext"; // UserContext import 추가
 const TimelinePage = () => {
   const navigate = useNavigate(); // 네비게이션 훅 사용
   const [data, setData] = useState([]); // 로컬 스토리지에서 불러온 데이터를 저장
-  const { isLoggedIn } = useContext(UserContext); // 로그인 상태 확인
+  const { user } = useContext(UserContext); // 로그인 상태 가져오기
 
   useEffect(() => {
     // 로컬 스토리지에서 데이터 불러오기
@@ -34,7 +34,7 @@ const TimelinePage = () => {
 
   // 선택된 제보만 삭제
   const handleDelete = (id) => {
-    if (!isLoggedIn) {
+    if (user.nickname) {
       alert("로그인이 필요합니다."); // 로그인되지 않은 경우 경고
       return;
     }
@@ -50,7 +50,7 @@ const TimelinePage = () => {
   };
 
   const handleClearAll = () => {
-    if (!isLoggedIn) {
+    if (user.nickname) {
       alert("로그인이 필요합니다."); // 로그인되지 않은 경우 경고
       return;
     }
