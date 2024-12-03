@@ -1,15 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../utils/UserContext"; // UserContext 가져오기
 import styles from "./MainPage.styles"; // 통합 스타일 가져오기
 
 function SidebarComponent() {
-  const { user } = useContext(UserContext); // 로그인 상태 가져오기
+  const { user, login } = useContext(UserContext); // UserContext의 user와 login 함수 가져오기
   const navigate = useNavigate();
 
-  console.log(user.nickname);
+  // 컴포넌트 마운트 시 로컬스토리지에서 유저 정보 불러오기
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      login(parsedUser.nickname, parsedUser.email); // UserContext에 로그인 상태 설정
+    }
+  }, [login]);
+
+  // 로그인 상태 확인 및 제한된 페이지로의 이동 처리
   const handleRestrictedNavigation = (path) => {
-    if (user.nickname) {
+    if (user?.nickname) {
       navigate(path);
     } else {
       alert("로그인이 필요합니다."); // 경고 메시지 표시
