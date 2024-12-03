@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom"; // React Router import 추가
 import Header from "../components/header/Header";
 import TimelineCard from "../components/timelineCard/TimelineCard.js";
 import styles from "./TimelinePage.styles.js";
+import { UserContext } from "../utils/UserContext"; // UserContext import 추가
 
 const TimelinePage = () => {
   const navigate = useNavigate(); // 네비게이션 훅 사용
   const [data, setData] = useState([]); // 로컬 스토리지에서 불러온 데이터를 저장
+  const { isLoggedIn } = useContext(UserContext); // 로그인 상태 확인
 
   useEffect(() => {
     // 로컬 스토리지에서 데이터 불러오기
@@ -32,6 +34,11 @@ const TimelinePage = () => {
 
   // 선택된 제보만 삭제
   const handleDelete = (id) => {
+    if (!isLoggedIn) {
+      alert("로그인이 필요합니다."); // 로그인되지 않은 경우 경고
+      return;
+    }
+
     // 로컬 스토리지에서 해당 데이터 삭제
     const storedReports = JSON.parse(localStorage.getItem("reports")) || [];
     const updatedReports = storedReports.filter((_, index) => index !== id);
@@ -43,6 +50,11 @@ const TimelinePage = () => {
   };
 
   const handleClearAll = () => {
+    if (!isLoggedIn) {
+      alert("로그인이 필요합니다."); // 로그인되지 않은 경우 경고
+      return;
+    }
+
     // reports 키만 삭제
     localStorage.removeItem("reports");
     setData([]); // 상태 초기화
@@ -84,17 +96,17 @@ const TimelinePage = () => {
           <p style={styles.lastUpdate}>마지막 업데이트 : {lastUpdate}</p>
 
           <div style={styles.scrollContainer}>
-          {data.map((item, index) => (
-            <TimelineCard
-              key={index}
-              title={item.title}
-              description={item.description}
-              dateSubmitted={item.dateSubmitted}
-              dateFound={item.dateFound}
-              images={item.images}
-              onDelete={() => handleDelete(item.id)} // 삭제 핸들러 전달
-            />
-          ))}
+            {data.map((item, index) => (
+              <TimelineCard
+                key={index}
+                title={item.title}
+                description={item.description}
+                dateSubmitted={item.dateSubmitted}
+                dateFound={item.dateFound}
+                images={item.images}
+                onDelete={() => handleDelete(item.id)} // 삭제 핸들러 전달
+              />
+            ))}
           </div>
         </div>
       </div>
